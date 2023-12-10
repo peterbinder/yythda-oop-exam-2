@@ -15,10 +15,6 @@ class Bike(ABC):
     def bike_id(self):
         return self._bike_id
 
-    @bike_id.setter
-    def bike_id(self, value):
-        pass
-
     @property
     def bike_type(self):
         return self._bike_type
@@ -31,11 +27,16 @@ class Bike(ABC):
     def condition(self):
         return self._condition
 
+    def get_bike_info(self):
+        return (f'Bike ID: {self._bike_id}\n'
+                f'Type: {self._bike_type}\n'
+                f'Condition: {self._condition}\n'
+                f'Price for a day: {self._price}\n')
+
 
 class RoadBike(Bike):
     def __init__(self, bike_id, price, condition):
         super().__init__(bike_id, ROAD_BIKE, price, condition)
-
 
 
 class MountainBike(Bike):

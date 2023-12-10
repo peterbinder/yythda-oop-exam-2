@@ -69,7 +69,7 @@ class BikeRentalService:
     def list_all_rented_bikes(self):
         for rental in self._rental_list:
             print(f'---------------------------------\n\n'
-                  f'Bike info: {rental.bike.get_bike_info()}\n'
+                  f'[Bike info]\n{rental.bike.get_bike_info()}\n'
                   f'Rented: {rental.start_date} - {rental.end_date}\n'
                   f'Days: {(rental.end_date - rental.start_date).days}\n' 
                   f'Total price: {rental.get_price()} HUF\n')

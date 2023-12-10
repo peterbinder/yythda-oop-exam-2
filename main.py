@@ -30,7 +30,16 @@ def list_all_bikes(rental_service):
 
 
 def cancel_rent(rental_service):
-    pass
+    print(f'Start cancellation...\n')
+    start_date = convert_to_date(input(f'Please enter the start date of your rent! (yyyy-mm-dd)\n'))
+    end_date = convert_to_date(input(f'Please enter the end date of your rent! (yyyy-mm-dd)\n'))
+    bike_id = input(f'Please enter the bike id\n')
+
+    rental_service.cancel_rent(bike_id, start_date, end_date)
+
+    print(f'-----------------------------------------------------------------------------\n'
+          f'Your bike rent has been cancelled\n'
+          f'-----------------------------------------------------------------------------\n')
 
 
 def add_bikes(rental_service):

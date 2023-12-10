@@ -3,7 +3,7 @@ from exception import BikeRentalException
 
 class RentalItem:
     def __init__(self, bike, start_date, end_date):
-        self._rent_id = f'{bike.bike_id}-{start_date}-{end_date}'
+        self._rent_id = f'{bike.bike_id}-{start_date.strftime("%Y%m%d")}-{end_date.strftime("%Y%m%d")}'
         self._bike = bike
         self._start_date = start_date
         self._end_date = end_date
@@ -46,14 +46,18 @@ class BikeRentalService:
 
         raise BikeRentalException('Bike is not available in the given period')
 
+    def cancel_rent(self, bike_id, start_date, end_date):
+        rent_id_to_delete = f'{bike_id}-{start_date.strftime("%Y%m%d")}-{end_date.strftime("%Y%m%d")}'
+        for rental in self._rental_list:
+            if rental.rent_id == rent_id_to_delete:
+                self._rental_list.remove(rental)
+            # raise BikeRentalException('rental item cannot be found')
+
     def is_bike_available(self, bike_id, start_date, end_date):
         for rental_item in self._rental_list:
             if rental_item.bike.bike_id == bike_id and rental_item.end_date >= start_date and rental_item.start_date <= end_date:
                 return False
         return True
-
-    def does_bike_exist(self, bike_id):
-        pass
 
     def find_bike(self, bike_id):
         for bike in self._bikes:

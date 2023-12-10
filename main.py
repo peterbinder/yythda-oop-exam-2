@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 
 from bike import RoadBike, MountainBike
@@ -6,6 +7,7 @@ from rental import BikeRentalService
 
 def convert_to_date(date):
     return datetime.strptime(date, '%Y-%m-%d')
+
 
 def start_bike_rent(rental_service):
     start_date = convert_to_date(input(f'Please enter the start date! (yyyy-mm-dd)\n'))
@@ -74,16 +76,18 @@ if __name__ == '__main__':
                                 f'4. Cancel rent\n'
                                 f'5. Exit\n')
 
-        if selected_option == '1':
-            start_bike_rent(bike_rental_service)
-        elif selected_option == '2':
-            list_all_bikes(bike_rental_service)
-        elif selected_option == '3':
-            list_rented_bikes(bike_rental_service)
-        elif selected_option == '4':
-            cancel_rent(bike_rental_service)
-        elif selected_option == '5':
-            break
-        else:
-            print(f'Invalid input')
-
+        try:
+            if selected_option == '1':
+                start_bike_rent(bike_rental_service)
+            elif selected_option == '2':
+                list_all_bikes(bike_rental_service)
+            elif selected_option == '3':
+                list_rented_bikes(bike_rental_service)
+            elif selected_option == '4':
+                cancel_rent(bike_rental_service)
+            elif selected_option == '5':
+                break
+            else:
+                print(f'Invalid input')
+        except Exception as e:
+            logging.error(str(e))

@@ -51,7 +51,8 @@ class BikeRentalService:
         for rental in self._rental_list:
             if rental.rent_id == rent_id_to_delete:
                 self._rental_list.remove(rental)
-            # raise BikeRentalException('rental item cannot be found')
+                return
+        raise BikeRentalException('Rental item cannot be found')
 
     def is_bike_available(self, bike_id, start_date, end_date):
         for rental_item in self._rental_list:
